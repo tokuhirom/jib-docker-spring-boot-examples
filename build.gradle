@@ -15,20 +15,14 @@ plugins {
 }
 
 jib {
-	from {
-		image = 'openjdk:alpine'
-	}
-	to {
-		image = 'tokuhirom/jib-demo-app'
-//		credHelper = 'osxkeychain'
-	}
 	container {
-		jvmFlags = ['-Xms512m', '-Xdebug', '-Xmy:flag=jib-rules']
+		jvmFlags = ['-Xms512m', '-Xdebug']
 		mainClass = 'com.example.demo.DemoApplication'
 		args = []
-		ports = ['8080']
+		ports = ['8080/tcp']
 	}
 }
+jib.to.image = 'tokuhirom/jib-demo-app'
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
